@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <title>Lap Steel Chords</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row my-3">
+        <div class="col">
+          <h1>Lap Steel - Open D</h1>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="ChordRoot" id="CRoot" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="CRoot">C</label>
+            
+              <input type="radio" class="btn-check" name="ChordRoot" id="CSharpRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="CSharpRoot">C#</label>
+            
+              <input type="radio" class="btn-check" name="ChordRoot" id="DRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="DRoot">D</label>
+            
+              <input type="radio" class="btn-check" name="ChordRoot" id="DSharpRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="DSharpRoot">D#</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="ERoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="ERoot">E</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="FRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="FRoot">F</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="FSharpRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="FSharpRoot">F#</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="GRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="GRoot">G</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="GSharpRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="GSharpRoot">G#</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="ARoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="ARoot">A</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="ASharpRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="ASharpRoot">A#</label>
+
+              <input type="radio" class="btn-check" name="ChordRoot" id="BRoot" autocomplete="off">
+              <label class="btn btn-outline-primary" for="BRoot">B</label>
+            </div>
+        </div>
+      <div class="col">
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="ChordFormula" id="Major" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="Major">Major</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Major7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Major7">Maj7</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Major6" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Major6">Maj6</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Minor" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Minor">Minor</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Minor7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Minor7">Min7</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Minor6" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Minor6">Min6</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Augmented" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Augmented">Aud</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="Augmented7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Augmented7">Aug7</label>
+
+            <input type="radio" class="btn-check" name="ChordFormula" id="AugmentedMajor7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="AugmentedMajor7">AugMaj7</label>
+            
+            <input type="radio" class="btn-check" name="ChordFormula" id="Diminished" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Diminished">Dim</label>
+            
+            <input type="radio" class="btn-check" name="ChordFormula" id="Diminished7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="Diminished7">Dim</label>
+          </div>
+      </div>
+  </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="scripts/jquery.slim.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/svguitar.umd.js"></script>
+    <script src="scripts/OpenD-12frets.js"></script>
+
+    <script>
+      ;(function () {
+        var selectedChord = chordCRootMajor;
+        initialSettings = selectedChord.settings;
+        initialChord = selectedChord.chord;
+
+        $('input:radio').change(function() {
+          $('#console-event').html('Toggle: ' + $(this).prop('checked'));
+          console.log("Change event: " + this.id);
+
+          var rootId = $("input[name='ChordRoot']:checked")[0].id;
+          var formulaId = $("input[name='ChordFormula']:checked")[0].id;
+          
+          var chordName = 'chord' + rootId + formulaId;
+          var chord = eval(chordName)
+          drawChord( chord.chord, chord.settings );
+        })        
+
+        // initialize chart
+        var chart = new svguitar.SVGuitarChord('#result')
+          .configure(initialSettings)
+          .chord(initialChord)
+
+        function drawChord(chord, settings) {
+          console.log('Drawing chord ', chord, ' with settings', settings)
+
+          try {
+            chart.configure(settings).chord(chord).draw()
+          } catch (err) {
+            alert('Failed to create chart: ' + err.message)
+
+            throw err
+          }
+        }
+
+        drawChord(initialChord, initialSettings)
+      })()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+.vscode
+.idea
+node_modules
+bin
+obj
+/lap-steel-chord-displayer/scripts/svguitar.umd.js
+/lap-steel-chord-displayer/scripts/svguitar.umd.js.map
+/lap-steel-chord-displayer/scripts/bootstrap.min.js
+/lap-steel-chord-displayer/scripts/bootstrap.min.js.map
+/lap-steel-chord-displayer/scripts/jquery.slim.min.js
+/lap-steel-chord-displayer/scripts/jquery.slim.min.map
+/lap-steel-chord-displayer/styles/bootstrap.min.css.map
+/lap-steel-chord-displayer/styles/bootstrap.min.css
