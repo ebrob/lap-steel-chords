@@ -45,7 +45,6 @@ public class LapSteelChordGenerator
             {
                 var chord = new Chord( root, formula.Formula );
                 var varName = $"chord{root.ToString().Replace( "#", "Sharp" )}Root{formula.Formula}";
-                //var title = $"{root.ToString()} {formula.Title}";
                 var oneChordJs = GenerateChord( instrument, chord, varName );
                 js.AppendLine( oneChordJs );
             }
@@ -117,10 +116,9 @@ public class LapSteelChordGenerator
                     if( fretPitch.PitchClass != pitch )
                         continue;
 
-                    // finger at string 2, fret 3, with text '3', colored red and has class '.red'
-                    //[2, 3, { text: '3', color: '#F00', className: 'red' }],
                     //var finger = $"[{stringIndex + 1}, {fretIndex+1}, {{ text: '{pitch}', color: '#F00', className: 'red' }}],";
-                    var finger = $"[{stringIndex + 1}, {fretIndex+1}, {{ text: '{pitch}' }}],";
+                    //var finger = $"[{stringIndex + 1}, {fretIndex+1}, {{ text: '{pitch}' }}],";
+                    var finger = $"[{stringIndex + 1}, {fretIndex+1}, {{ text: '{fretIndex + 1}' }}],";
                     js.AppendLine( finger );
                 }
             }
